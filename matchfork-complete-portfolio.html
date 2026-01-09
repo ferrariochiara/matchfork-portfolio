@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MatchFork - UX/UI Case Study</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f8f9fa;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 32px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #5D2689;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #FFE863;
+        }
+
+        nav a.active {
+            color: #FFE863;
+            border-bottom: 2px solid #FFE863;
+        }
+
+        /* Sections */
+        .section {
+            display: none;
+            min-height: 100vh;
+            padding: 120px 24px 60px;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: #5D2689;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 600;
+            color: #5D2689;
+            margin: 40px 0 24px 0;
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #5D2689;
+            margin: 24px 0 16px 0;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 32px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .wireframe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .wireframe-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .wireframe-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .wireframe-label {
+            padding: 16px;
+            background: #E2D2EF;
+            color: #5D2689;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .flow-image {
+            width: 100%;
+            border-radius: 12px;
+            margin: 24px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+
+            .content-card {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="nav-content">
+            <svg class="logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path d="M70 50 L70 80 L50 120 L40 120 L60 80 L60 50 Z" fill="#5D2689"/>
+                <path d="M130 50 L130 80 L150 120 L160 120 L140 80 L140 50 Z" fill="#5D2689"/>
+                <circle cx="100" cy="140" r="15" fill="#5D2689"/>
+                <path d="M85 135 Q100 125 115 135" stroke="#5D2689" stroke-width="3" fill="none"/>
+            </svg>
+            <nav>
+                <ul>
+                    <li><a href="#overview" class="nav-link active">Overview</a></li>
+                    <li><a href="#research" class="nav-link">Research</a></li>
+                    <li><a href="#architecture" class="nav-link">Architecture</a></li>
+                    <li><a href="#design" class="nav-link">Design</a></li>
+                    <li><a href="#impact" class="nav-link">Impact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Overview Section -->
+    <section id="overview" class="section active">
+        <div class="container">
+            <h1>MatchFork</h1>
+            <p class="subtitle">Transforming group dining decisions through collaborative swiping</p>
+
+            <div class="content-card">
+                <h2>The Problem</h2>
+                <p>Many people face difficulties deciding where to go eat, especially in groups, due to the diversity of options, preferences, and dietary restrictions. This generates frustration, wastes time, and creates conflicts, affecting the overall dining experience.</p>
+            </div>
+
+            <div class="content-card">
+                <h2>The Context</h2>
+                <p>In urban areas, the wide range of gastronomic offerings and diversity of tastes complicate restaurant selection. Currently, there are no efficient tools that facilitate group decision-making in a fast and enjoyable way.</p>
+            </div>
+
+            <div class="content-card">
+                <h2>The Solution</h2>
+                <p>A digital solution that simplifies and streamlines decision-making about where to eat, considering individual and group needs to improve the collective experience. MatchFork combines personalized filters, group voting, and a playful swipe interface inspired by dating apps.</p>
+            </div>
+
+            <div class="content-card">
+                <h2>My Role</h2>
+                <p><strong>UX/UI Designer</strong> - User research, information architecture, wireframing, prototyping, and visual design</p>
+                <p><strong>Timeline:</strong> 3 months | <strong>Team:</strong> Chiara Ferrairo, Eugenia Leonhardt, Maria Victoria Zanello</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research" class="section">
+        <div class="container">
+            <h1>Research & Discovery</h1>
+            <p class="subtitle">Understanding user needs through competitive analysis and user interviews</p>
+
+            <div class="content-card">
+                <h2>Competitive Analysis</h2>
+                <p>We analyzed leading restaurant apps (TheFork, OpenTable, TripAdvisor) and found significant usability issues:</p>
+                <ul style="margin: 20px 0 20px 40px;">
+                    <li><strong>Search functionality scores: 2-4/10</strong> - Users struggle to find restaurants efficiently</li>
+                    <li><strong>No group decision features</strong> - All apps focus on individual users</li>
+                    <li><strong>Information overload</strong> - TripAdvisor particularly suffers from cluttered interfaces</li>
+                    <li><strong>Poor mobile experience</strong> - Navigation is not optimized for quick decisions</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <h2>User Personas</h2>
+                <p>Through user interviews and research, we developed two key personas:</p>
+                
+                <h3>Laura Gómez - Proto Persona</h3>
+                <p><strong>Age:</strong> 25 | <strong>Occupation:</strong> Marketing Professional | <strong>Location:</strong> Buenos Aires</p>
+                <p><em>"We always take too long deciding where to eat; we need something that makes the process easier and faster."</em></p>
+                <p style="margin-top: 16px;"><strong>Key Frustrations:</strong> Endless group discussions, lack of tools to centralize preferences, unintuitive existing apps</p>
+                <p><strong>Goals:</strong> Simplify group decisions, discover new restaurants, save time</p>
+
+                <h3 style="margin-top: 32px;">Camila Pérez - User Persona</h3>
+                <p><strong>Age:</strong> 20 | <strong>Occupation:</strong> Student | <strong>Location:</strong> Rosario</p>
+                <p><em>"I usually get anxious choosing a place to eat because I don't like it when the place doesn't meet my expectations."</em></p>
+                <p style="margin-top: 16px;"><strong>Key Frustrations:</strong> Anxiety about disappointing others, scattered information across platforms, difficulty organizing options</p>
+                <p><strong>Goals:</strong> Find quality places, have pleasant experiences, avoid group conflicts</p>
+            </div>
+
+            <div class="content-card">
+                <h2>Key Insights</h2>
+                <ul style="margin: 20px 0 20px 40px;">
+                    <li>Group dining decisions take an average of <strong>25 minutes</strong></li>
+                    <li><strong>70%</strong> of users want group matching features</li>
+                    <li>Anxiety and fear of disappointment are major emotional factors</li>
+                    <li>Users need detailed information (reviews, photos, menus) to feel confident</li>
+                    <li>The process should be fun, not stressful</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="section">
+        <div class="container">
+            <h1>Information Architecture</h1>
+            <p class="subtitle">Organizing features based on user mental models</p>
+
+            <div class="content-card">
+                <h2>Card Sorting Results</h2>
+                <p>We conducted card sorting exercises with users to understand how they naturally group features:</p>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400'%3E%3Crect width='800' height='400' fill='%23f8f9fa'/%3E%3Ctext x='400' y='200' font-family='Poppins' font-size='20' fill='%235D2689' text-anchor='middle'%3ECard Sorting Similarity Map%3C/text%3E%3C/svg%3E" alt="Card Sorting" class="flow-image">
+                <p style="margin-top: 16px;"><strong>Key Finding:</strong> Users grouped listing, filters, and search together in over 70% of cases, highlighting these as core features.</p>
+            </div>
+
+            <div class="content-card">
+                <h2>Site Map</h2>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='800' height='500' fill='%23f8f9fa'/%3E%3Ctext x='400' y='250' font-family='Poppins' font-size='20' fill='%235D2689' text-anchor='middle'%3ESite Map - 4 Main Sections%3C/text%3E%3C/svg%3E" alt="Site Map" class="flow-image">
+                <p style="margin-top: 16px;">Four main sections emerged: <strong>Inicio</strong> (restaurant discovery), <strong>Planificar</strong> (group management), <strong>Perfil</strong> (user settings), and <strong>Geolocalización</strong> (location-based search).</p>
+            </div>
+
+            <div class="content-card">
+                <h2>Task Flow</h2>
+                <p><strong>Goal:</strong> Match on a restaurant with a group</p>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='200'%3E%3Crect width='1000' height='200' fill='%23f8f9fa'/%3E%3Ctext x='500' y='100' font-family='Poppins' font-size='18' fill='%235D2689' text-anchor='middle'%3ETask Flow: Select Organization → Choose Group → Swipe → Apply Filters → Match%3C/text%3E%3C/svg%3E" alt="Task Flow" class="flow-image">
+            </div>
+
+            <div class="content-card">
+                <h2>User Flow</h2>
+                <p><strong>Complete journey:</strong> From app open to restaurant match</p>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='600'%3E%3Crect width='1000' height='600' fill='%23f8f9fa'/%3E%3Ctext x='500' y='300' font-family='Poppins' font-size='18' fill='%235D2689' text-anchor='middle'%3EUser Flow with decision points and error states%3C/text%3E%3C/svg%3E" alt="User Flow" class="flow-image">
+                <p style="margin-top: 16px;">The flow includes validation points, error handling, and multiple paths to accommodate different user behaviors.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Section -->
+    <section id="design" class="section">
+        <div class="container">
+            <h1>Design Evolution</h1>
+            <p class="subtitle">From sketches to high-fidelity prototypes</p>
+
+            <div class="content-card">
+                <h2>Hand-Drawn Sketches</h2>
+                <p>Initial ideation focused on core interactions and layout options:</p>
+                <div class="wireframe-grid">
+                    <div class="wireframe-item">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='500'%3E%3Crect width='300' height='500' fill='%23f0f0f0'/%3E%3Ctext x='150' y='250' font-family='Poppins' font-size='16' fill='%23666' text-anchor='middle'%3ESketch 1%3C/text%3E%3C/svg%3E" alt="Sketch">
+                        <div class="wireframe-label">Initial Layouts</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2>Low-Fidelity Wireframes</h2>
+                <p>Testing structure and basic interactions with grayscale prototypes:</p>
+                <div class="wireframe-grid">
+                    <div class="wireframe-item">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='600'%3E%3Crect width='300' height='600' fill='%23e0e0e0'/%3E%3Crect x='20' y='100' width='260' height='100' rx='8' fill='%23999'/%3E%3Crect x='20' y='220' width='260' height='60' rx='8' fill='%23bbb'/%3E%3C/svg%3E" alt="Low-fi Swipe">
+                        <div class="wireframe-label">Swipe Interface</div>
+                    </div>
+                    <div class="wireframe-item">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='600'%3E%3Crect width='300' height='600' fill='%23e0e0e0'/%3E%3Crect x='20' y='100' width='260' height='400' rx='8' fill='%23ccc'/%3E%3C/svg%3E" alt="Low-fi Match">
+                        <div class="wireframe-label">Match Screen</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2>Medium-Fidelity Wireframes</h2>
+                <p>Refined layouts with better hierarchy and structure:</p>
+                <div class="wireframe-grid">
+                    <div class="wireframe-item">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='600'%3E%3Crect width='300' height='600' fill='%23FFFADA'/%3E%3Crect x='20' y='80' width='120' height='40' rx='20' fill='%23E2D2EF'/%3E%3Crect x='160' y='80' width='120' height='40' rx='20' fill='%23E2D2EF'/%3E%3C/svg%3E" alt="Med-fi Home">
+                        <div class="wireframe-label">Home Screen</div>
+                    </div>
+                    <div class="wireframe-item">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='600'%3E%3Crect width='300' height='600' fill='%23FFFADA'/%3E%3Crect x='20' y='100' width='260' height='400' rx='12' fill='%23E2D2EF'/%3E%3C/svg%3E" alt="Med-fi Swipe">
+                        <div class="wireframe-label">Swipe Flow</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2>High-Fidelity Designs</h2>
+                <p>Final designs with brand colors, real content, and polished interactions:</p>
+                <div class="wireframe-grid">
+                    <div class="wireframe-item">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='600'%3E%3Crect width='300' height='600' fill='%23FFFADA'/%3E%3Crect x='20' y='80' width='120' height='40' rx='20' fill='%23E2D2EF'/%3E%3Ctext x='80' y='105' font-family='Poppins' font-size='14' fill='%235D2689' text-anchor='middle'%3ERestaurantes%3C/text%3E%3C/svg%3E" alt="Hi-fi Home">
+                        <div class="wireframe-label">Home - Restaurant Discovery</div>
+                    </div>
+                    <div class="wireframe-item">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='600'%3E%3Crect width='300' height='600' fill='%23FFFADA'/%3E%3Crect x='20' y='100' width='260' height='350' rx='12' fill='%23ddd'/%3E%3Crect x='80' y='470' width='60' height='60' rx='12' fill='%235D2689'/%3E%3Crect x='160' y='470' width='60' height='60' rx='12' fill='%235D2689'/%3E%3C/svg%3E" alt="Hi-fi Swipe">
+                        <div class="wireframe-label">Swipe Interface</div>
+                    </div>
+                    <div class="wireframe-item">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='600'%3E%3Crect width='300' height='600' fill='%23FFFADA'/%3E%3Crect x='20' y='150' width='260' height='300' rx='12' fill='%23e0e0e0'/%3E%3Ctext x='150' y='310' font-family='Poppins' font-size='28' font-weight='bold' fill='%235D2689' text-anchor='middle'%3EHAY MATCH%3C/text%3E%3C/svg%3E" alt="Hi-fi Match">
+                        <div class="wireframe-label">Match Success</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2>Design System</h2>
+                <h3>Colors</h3>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 20px 0;">
+                    <div style="text-align: center;">
+                        <div style="width: 100%; height: 80px; background: #5D2689; border-radius: 8px; margin-bottom: 8px;"></div>
+                        <p style="font-size: 14px;">#5D2689<br>Primary Purple</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 100%; height: 80px; background: #FFE863; border-radius: 8px; margin-bottom: 8px;"></div>
+                        <p style="font-size: 14px;">#FFE863<br>Primary Yellow</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 100%; height: 80px; background: #E2D2EF; border-radius: 8px; margin-bottom: 8px;"></div>
+                        <p style="font-size: 14px;">#E2D2EF<br>Light Purple</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 100%; height: 80px; background: #FFFADA; border-radius: 8px; margin-bottom: 8px;"></div>
+                        <p style="font-size: 14px;">#FFFADA<br>Light Yellow</p>
+                    </div>
+                </div>
+
+                <h3>Typography</h3>
+                <p><strong>Font Family:</strong> Poppins</p>
+                <p><strong>Weights:</strong> Regular (400), Medium (500), Semibold (600), Bold (700)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact" class="section">
+        <div class="container">
+            <h1>Expected Impact</h1>
+            <p class="subtitle">Projected outcomes based on user testing and competitive analysis</p>
+
+            <div class="content-card">
+                <h2>Key Metrics</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin: 32px 0;">
+                    <div style="background: linear-gradient(135deg, #5D2689 0%, #8B4FB8 100%); border-radius: 12px; padding: 32px; color: white; text-align: center;">
+                        <div style="font-size: 48px; font-weight: 700;">75%</div>
+                        <div style="font-size: 16px; opacity: 0.95;">Reduction in Decision Time</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #FFE863 0%, #FFD43B 100%); border-radius: 12px; padding: 32px; color: #1a1a1a; text-align: center;">
+                        <div style="font-size: 48px; font-weight: 700;">90%</div>
+                        <div style="font-size: 16px;">Increase in User Satisfaction</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #E2D2EF 0%, #C9B3E0 100%); border-radius: 12px; padding: 32px; color: #5D2689; text-align: center;">
+                        <div style="font-size: 48px; font-weight: 700;">85%</div>
+                        <div style="font-size: 16px;">Conflict Resolution Rate</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #FFFADA 0%, #FFF4B3 100%); border-radius: 12px; padding: 32px; color: #5D2689; text-align: center;">
+                        <div style="font-size: 48px; font-weight: 700;">100%</div>
+                        <div style="font-size: 16px;">Group Consensus</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2>Solving Real Problems</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 32px 0;">
+                    <div style="padding: 24px; border-radius: 12px; background: #E2D2EF; border: 2px solid #5D2689;">
+                        <h4 style="font-size: 18px; margin-bottom: 12px; color: #5D2689;">Current Pain Points</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 8px 0; position: relative; padding-left: 24px;">× Endless group discussions (20-30 min)</li>
+                            <li style="padding: 8px 0; position: relative; padding-left: 24px;">× Anxiety about disappointing others</li>
+                            <li style="padding: 8px 0; position: relative; padding-left: 24px;">× Scattered information</li>
+                            <li style="padding: 8px 0; position: relative; padding-left: 24px;">× No fair preference system</li>
+                        </ul>
+                    </div>
+                    <div style="padding: 24px; border-radius: 12px; background: #FFFADA; border: 2px solid #FFE863;">
+                        <h4 style="font-size: 18px; margin-bottom: 12px; color: #5D2689;">MatchFork Solutions</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 8px 0; position: relative; padding-left: 24px;">✓ Quick matching (3-5 min avg)</li>
+                            <li style="padding: 8px 0; position: relative; padding-left: 24px;">✓ Democratic decision-making</li>
+                            <li style="padding: 8px 0; position: relative; padding-left: 24px;">✓ Centralized restaurant info</li>
+                            <li style="padding: 8px 0; position: relative; padding-left: 24px;">✓ Fun, stress-free swiping</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2>Competitive Advantage</h2>
+                <p><strong>Market Gap Identified:</strong> No existing competitor offers group matching functionality</p>
+                <ul style="margin: 20px 0 20px 40px;">
+                    <li>TheFork, OpenTable, TripAdvisor all focus on individual users</li>
+                    <li>Average usability score of competitors: 3/10</li>
+                    <li>70%+ of users want group decision features</li>
+                    <li>High search volume for "where to eat" with unmet needs</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <h2>Long-term Vision</h2>
+                <h3>For Users</h3>
+                <p>MatchFork transforms dining from a source of stress into an opportunity for connection. By removing decision fatigue and ensuring everyone's voice is heard, groups spend less time debating and more time enjoying meals together.</p>
+
+                <h3>For Restaurants</h3>
+                <p>Restaurants benefit from qualified group bookings where all diners are genuinely interested, leading to better experiences and increased likelihood of repeat visits.</p>
+
+                <h3>Market Impact</h3>
+                <p>By solving a pain point no competitor addresses, MatchFork is positioned to capture frustrated users from existing platforms and establish itself as the go-to solution for social dining coordination.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.section');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                const targetId = link.getAttribute('href').substring(1);
+                
+                // Hide all sections
+                sections.forEach(section => section.classList.remove('active'));
+                
+                // Remove active class from all links
+                navLinks.forEach(l => l.classList.remove('active'));
+                
+                // Show target section
+                document.getElementById(targetId).classList.add('active');
+                
+                // Add active class to clicked link
+                link.classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+    </script>
+</body>
+</html>
